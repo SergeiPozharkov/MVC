@@ -22,7 +22,8 @@ spl_autoload_register(function ($class) {
     }
 });
 
-Router::addRoutes('^pages/?(?P<action>[a-z-]+)?$', ['controller' => 'Posts']);
+Router::addRoutes('^page/(?P<action>[a-z-]+)/(?P<alias>[a-z-]+)$', ['controller' => 'Page']);
+Router::addRoutes('^page/(?P<alias>[a-z-]+)$', ['controller' => 'Page', 'action' => 'view']);
 
 //Default routes
 Router::addRoutes('^$', ['controller' => 'Main', 'action' => 'index']);

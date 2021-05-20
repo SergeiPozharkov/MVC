@@ -62,7 +62,7 @@ class Router
                 if (!isset($route['action'])) {
                     $route['action'] = 'index';
                 }
-
+                $route['controller'] = self::upperCamelCase($route['controller']);
                 self::$route = $route;
                 return true;
             }
@@ -76,12 +76,14 @@ class Router
      */
     public static function dispatch(string $url): void
     {
+        var_dump($url);
+        $url = self::removeQueryString($url);
         if (self::matchRoute($url)) {
 
-            $controller = 'app\controllers\\' . self::upperCamelCase(self::$route['controller']);
+            $controller = 'app\controllers\\' . self::$route['controller'];
             if (class_exists($controller)) {
-
-                $controllerObj = new $controller;
+//                debug(self::$route);
+                $controllerObj = new $controller(self::$route);
                 $action = self::lowerCamelCase(self::$route['action']) . 'Action';
 
                 if (method_exists($controllerObj, $action)) {
@@ -118,5 +120,22 @@ class Router
     protected static function lowerCamelCase(string $string): array|string
     {
         return $string = lcfirst(self::upperCamelCase($string));
+    }
+
+    /**
+     * Возвращает не явную часть URL адреса
+     * @param string $url
+     * @return string
+     */
+    protected static function removeQueryString(string $url): string
+    {
+        if ($url) {
+            $params = explode('&', $url);
+            if (false === strpos($params[0], '=')) {
+                return rtrim($params[0], '/');
+            } else {
+                return '';
+            }
+        }
     }
 }
