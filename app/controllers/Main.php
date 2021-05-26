@@ -2,12 +2,15 @@
 
 namespace app\controllers;
 
-class Main
+class Main extends App
 {
+    public string $layout = 'main';
 
     public function indexAction()
     {
-        echo 'Main::indexAction()';
+        $this->layout = false;
+//        $this->layout = 'main';
+//        $this->view = 'test';
     }
 
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace vendor\core;
+namespace core;
 
 class Router
 {
@@ -44,10 +44,10 @@ class Router
 
     /**
      * Ищет URL в массиве с маршрутами
-     * @param string $url входной URL
+     * @param mixed $url входной URL
      * @return bool
      */
-    public static function matchRoute(string $url): bool
+    public static function matchRoute(mixed $url): bool
     {
         foreach (self::$routes as $pattern => $route) {
 
@@ -76,21 +76,23 @@ class Router
      */
     public static function dispatch(string $url): void
     {
-        var_dump($url);
+
         $url = self::removeQueryString($url);
         if (self::matchRoute($url)) {
 
             $controller = 'app\controllers\\' . self::$route['controller'];
             if (class_exists($controller)) {
-//                debug(self::$route);
+
                 $controllerObj = new $controller(self::$route);
                 $action = self::lowerCamelCase(self::$route['action']) . 'Action';
 
                 if (method_exists($controllerObj, $action)) {
                     $controllerObj->$action();
+                    $controllerObj->getView();
                 } else {
                     echo "Action (method) <b>$controller::$action</b> not found";
                 }
+
             } else {
                 echo "Controller (class) <b>$controller</b> not found";
             }
@@ -124,14 +126,14 @@ class Router
 
     /**
      * Возвращает не явную часть URL адреса
-     * @param string $url
+     * @param mixed $url
      * @return string
      */
-    protected static function removeQueryString(string $url): string
+    protected static function removeQueryString(mixed $url)
     {
         if ($url) {
             $params = explode('&', $url);
-            if (false === strpos($params[0], '=')) {
+            if (strpos($params[0], '=') === false) {
                 return rtrim($params[0], '/');
             } else {
                 return '';
