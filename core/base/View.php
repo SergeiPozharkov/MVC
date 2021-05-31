@@ -26,15 +26,20 @@ class View
 
     public function __construct($route, $layout = '', $view = '')
     {
-        var_dump($layout);
-        var_dump($view);
         $this->route = $route;
-        $this->layout = $layout ?: LAYOUT;
+        if ($layout === false) {
+            $this->layout = false;
+        } else {
+            $this->layout = $layout ?: LAYOUT;
+        }
         $this->view = $view;
     }
 
-    public function render()
+    public function render($data)
     {
+        if (is_array($data)) {
+            extract($data);
+        }
         $fileView = APP . "/views/{$this->route['controller']}/{$this->view}.php";
         ob_start();
         if (file_exists($fileView)) {
@@ -44,12 +49,15 @@ class View
         }
         $content = ob_get_clean();
 
-        $fileLayout = APP . "/views/layouts/{$this->layout}.php";
-        if (file_exists($fileLayout)) {
-            require $fileLayout;
-        } else {
-            echo "Не найден шаблон <b>$fileLayout</b>";
+        if (false !== $this->layout) {
+            $fileLayout = APP . "/views/layouts/{$this->layout}.php";
+            if (file_exists($fileLayout)) {
+                require $fileLayout;
+            } else {
+                echo "Не найден шаблон <b>$fileLayout</b>";
+            }
         }
+
     }
 
 }
