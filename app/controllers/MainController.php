@@ -2,17 +2,17 @@
 
 namespace app\controllers;
 
+use app\models\Main;
+
 class MainController extends AppController
 {
-//    public string $layout = 'main';
 
     public function indexAction()
     {
-//        $this->layout = false;
-//        $this->layout = 'main';
-//        $this->view = 'test';
-        $name = 'Sergey';
-        $this->setData(['name' => $name, 'msg' => 'Hi all!']);
+        $model = new Main();
+        $posts = $model->findAll();
+        print_r($posts);
+        $this->setData(compact('posts'));
     }
 
 }

@@ -15,7 +15,8 @@
 <h1>Default</h1>
 
 <?= $content; ?>
-
+<?= debug(\core\Db::$countSql) ?>
+<?= debug(\core\Db::$queries) ?>
 <!-- Optional JavaScript; choose one of the two! -->
 
 <!-- Option 1: Bootstrap Bundle with Popper -->
