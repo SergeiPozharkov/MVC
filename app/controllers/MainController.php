@@ -11,7 +11,12 @@ class MainController extends AppController
     {
         $model = new Main();
         $posts = $model->findAll();
-        print_r($posts);
+//        $post = $model->findOne('Тестовый пост', 'title');
+//        $data = $model->findBySql("SELECT * FROM {$model->tableName} WHERE title LIKE ?", ['%то%']);
+//        debug($data);
+//        print_r($post);
+        $data = $model->findLike('Тест', 'title');
+        debug($data);
         $this->setData(compact('posts'));
     }
 

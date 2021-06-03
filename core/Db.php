@@ -53,27 +53,29 @@ class Db
     /**
      * Подготавливает sql запрос к выполнению(prepare)(PDO)
      * @param string $sql
+     * @param array $params
      * @return bool
      */
-    public function execute(string $sql): bool
+    public function execute(string $sql, array $params = []): bool
     {
         self::$countSql++;
         self::$queries[] = $sql;
         $stmt = $this->pdo->prepare($sql);
-        return $stmt->execute();
+        return $stmt->execute($params);
     }
 
     /**
      * Выполняет запрос не требующий выборки(вывода) элементов sql таблицы
      * @param string $sql
+     * @param array $params
      * @return array
      */
-    public function query(string $sql): array
+    public function query(string $sql, array $params = []): array
     {
         self::$countSql++;
         self::$queries[] = $sql;
         $stmt = $this->pdo->prepare($sql);
-        $res = $stmt->execute();
+        $res = $stmt->execute($params);
         if ($res !== false) {
             return $stmt->fetchAll(\PDO::FETCH_ASSOC);
         }
