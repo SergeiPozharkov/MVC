@@ -10,14 +10,16 @@ class MainController extends AppController
     public function indexAction()
     {
         $model = new Main();
-        $posts = $model->findAll();
-//        $post = $model->findOne('Тестовый пост', 'title');
-//        $data = $model->findBySql("SELECT * FROM {$model->tableName} WHERE title LIKE ?", ['%то%']);
-//        debug($data);
-//        print_r($post);
-        $data = $model->findLike('Тест', 'title');
-        debug($data);
-        $this->setData(compact('posts'));
+        $posts = \R::findAll('posts');
+        $menu = $this->menu;
+        $this->setMeta('Main page', 'Page description', 'Key words');
+        $meta = $this->meta;
+        $this->setData(compact('posts', 'menu', 'meta'));
+    }
+
+    public function testAction()
+    {
+        $this->layout = 'test';
     }
 
 }

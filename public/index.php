@@ -9,6 +9,7 @@ $query = rtrim($_SERVER['QUERY_STRING'], '/');
 const WWW = __DIR__;
 define('CORE', dirname(__DIR__) . '/core');
 define('ROOT', dirname(__DIR__));
+define('LIBS', dirname(__DIR__) . '/libs');
 define('APP', dirname(__DIR__) . '/app');
 const LAYOUT = 'default';
 

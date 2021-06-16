@@ -4,7 +4,6 @@ require 'rb.php';
 
 $db = require '../config/config_db.php';
 R::setup($db['dsn'], $db['user'], $db['pass']);
-//var_dump(R::testConnection());
 R::freeze(true);
 R::fancyDebug(TRUE);
 //Create

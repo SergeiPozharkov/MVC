@@ -9,28 +9,15 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link rel="stylesheet" href="/public/css/style.css">
-    <title><?= $meta['title'] ?></title>
-    <meta name="description" content="<?= $meta['desc'] ?>">
-    <meta name="keywords" content="<?= $meta['keywords'] ?>">
+    <title>Default</title>
 </head>
 <body>
 <h1>Default</h1>
-<div class="container">
-    <?php if (!empty($menu)): ?>
-        <nav class="navbar navbar-expand-lg navbar-light bg-dark">
-            <ul class="navbar-nav">
-                <?php foreach ($menu as $item): ?>
-                    <li class="nav-item">
-                        <a href="category/<?= $item['id'] ?>"><?= $item['title'] ?></a>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
-        </nav>
-    <?php endif; ?>
-    <h1>TEST TEXT</h1>
-    <?= $content; ?>
-    <? //= debug(\core\Db::$countSql) ?>
-    <? //= debug(\core\Db::$queries) ?>
+Страница без меню
+<h1>TEST TEXT</h1>
+<?= $content; ?>
+<? //= debug(\core\Db::$countSql) ?>
+<? //= debug(\core\Db::$queries) ?>
 </div>
 <!-- Optional JavaScript; choose one of the two! -->
 

@@ -1,5 +1,6 @@
 <?= __FILE__ ?>
 <div class="container">
+    <!--    --><?php //debug($menu); ?>
     <?php if (!empty($posts)): ?>
         <?php foreach ($posts as $post): ?>
             <div class="panel panel-default">
