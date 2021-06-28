@@ -12,8 +12,16 @@ class MainController extends AppController
     {
 //        App::$app->getList();
         $model = new Main();
-        $posts = \R::findAll('posts');
-        App::$app->cache->set('posts', $posts);
+        \R::fancyDebug(true);
+        $posts = App::$app->cache->get('posts');
+        if (!$posts) {
+            $posts = \R::findAll('posts');
+            App::$app->cache->set('posts', $posts, 3600 * 24);
+        }
+//        echo date('Y-m-d H:i', time());
+//        echo '<br>';
+//        echo date('Y-m-d H:i', 1624628124);
+
         $menu = $this->menu;
         $this->setMeta('Main page', 'Page description', 'Key words');
         $meta = $this->meta;
