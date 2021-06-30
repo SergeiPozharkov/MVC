@@ -24,6 +24,12 @@ class View
      */
     public string $layout;
 
+    /**
+     * Массив в котором содержатся вырезанные js скрипты
+     * @var array
+     */
+    public array $scripts = [];
+
     public function __construct($route, $layout = '', $view = '')
     {
         $this->route = $route;
@@ -52,12 +58,33 @@ class View
         if (false !== $this->layout) {
             $fileLayout = APP . "/views/layouts/{$this->layout}.php";
             if (file_exists($fileLayout)) {
+                $content = $this->getScript($content);
+                $scripts = [];
+                if (!empty($this->scripts[0])) {
+                    $scripts = $this->scripts[0];
+                }
                 require $fileLayout;
             } else {
                 echo "Не найден шаблон <b>$fileLayout</b>";
             }
         }
 
+    }
+
+    /**
+     * Ищет js скрипты, вырезает их и возвращает html код без них
+     * @param  $content
+     * @return mixed
+     */
+    protected function getScript($content): mixed
+    {
+        $pattern = "#<script.*?>.*?</script>#si";
+        preg_match_all($pattern, $content, $this->scripts);
+        if (!empty($this->scripts)) {
+            $content = preg_replace($pattern, "", $content);
+        }
+
+        return $content;
     }
 
 }

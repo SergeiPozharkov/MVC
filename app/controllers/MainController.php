@@ -30,7 +30,12 @@ class MainController extends AppController
 
     public function testAction()
     {
-        $this->layout = 'test';
+        if ($this->isAjax()) {
+            echo "test 1";
+            die();
+        }
+        echo 'test 2';
+//        $this->layout = 'test';
     }
 
 }
