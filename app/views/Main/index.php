@@ -1,6 +1,6 @@
 <?= __FILE__ ?>
 <div class="container">
-    <button class="btm btn-primary" id="send">Кнопка</button>
+    <button class="btm btn-primary" id="send" >Кнопка</button>
     <?php if (!empty($posts)): ?>
         <?php foreach ($posts as $post): ?>
             <div class="panel panel-default">
@@ -13,7 +13,7 @@
         <?php endforeach; ?>
     <?php endif; ?>
 </div>
-<script src="js/test.js"></script>
+<script src="../../../public/js/test.js"></script>
 <script>
     $(function () {
         $('#send').click(function () {
