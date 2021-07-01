@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\Main;
 use core\App;
+use core\base\View;
 
 class MainController extends AppController
 {
@@ -23,9 +24,10 @@ class MainController extends AppController
 //        echo date('Y-m-d H:i', 1624628124);
 
         $menu = $this->menu;
-        $this->setMeta('Main page', 'Page description', 'Key words');
-        $meta = $this->meta;
-        $this->setData(compact('posts', 'menu', 'meta'));
+//        $this->setMeta('Main page', 'Page description', 'Key words');
+//        $meta = $this->meta;
+        View::setMeta('Main page', 'Page description', 'Key words');
+        $this->setData(compact('posts', 'menu'));
     }
 
     public function testAction()
@@ -33,7 +35,7 @@ class MainController extends AppController
         if ($this->isAjax()) {
             $model = new  Main();
             $post = \R::findOne('posts', "id = {$_POST['id']}");
-            $this->loadView('test', compact('post'));
+            $this->loadView('_test', compact('post'));
             die();
         }
         echo 'test 2';

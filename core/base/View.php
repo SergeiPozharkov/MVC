@@ -30,6 +30,9 @@ class View
      */
     public array $scripts = [];
 
+
+    public static array $meta = ['title' => '', 'desc' => '', 'keywords' => ''];
+
     public function __construct($route, $layout = '', $view = '')
     {
         $this->route = $route;
@@ -85,6 +88,29 @@ class View
         }
 
         return $content;
+    }
+
+    /**
+     * @return void
+     */
+    public static function getMeta(): void
+    {
+        echo '<title>' . self::$meta['title'] . '</title>
+        <meta name="description" content="' . self::$meta['desc'] . '">
+        <meta name="keywords" content="' . self::$meta['keywords'] . '">';
+//        return self::$meta;
+    }
+
+    /**
+     * @param string $title
+     * @param string $desc
+     * @param string $keyWords
+     */
+    public static function setMeta(string $title = '', string $desc = '', string $keyWords = ''): void
+    {
+        self::$meta['title'] = $title;
+        self::$meta['desc'] = $desc;
+        self::$meta['keywords'] = $keyWords;
     }
 
 }

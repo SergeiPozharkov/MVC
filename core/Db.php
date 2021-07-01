@@ -10,6 +10,7 @@ use R;
  */
 class Db
 {
+    use TSingleton;
 
     protected object $pdo;
     /**
@@ -17,7 +18,7 @@ class Db
      * ? перед типом свойства - значит, что свойство может быть указанного или типа null т.е. имеет "обнуляемый" тип
      * @var Db|null
      */
-    protected static ?Db $instance = null;
+//    protected static ?Db $instance = null;
     /**
      * Содержит количество выполненных sql запросов
      * @var int
@@ -44,17 +45,17 @@ class Db
 //        $this->pdo = new \PDO($db['dsn'], $db['user'], $db['pass'], $options);
     }
 
-    /**
-     * Проверяет создае ли объект текущего класса, если нет, то создает его
-     * @return Db
-     */
-    public static function instance(): Db
-    {
-        if (self::$instance === null) {
-            self::$instance = new self();
-        }
-        return self::$instance;
-    }
+//    /**
+//     * Проверяет создае ли объект текущего класса, если нет, то создает его
+//     * @return Db
+//     */
+//    public static function instance(): Db
+//    {
+//        if (self::$instance === null) {
+//            self::$instance = new self();
+//        }
+//        return self::$instance;
+//    }
 
     /**
      * Подготавливает sql запрос к выполнению(prepare)(PDO)
