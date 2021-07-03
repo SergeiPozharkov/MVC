@@ -1,12 +1,15 @@
 <?php
 
-error_reporting(-1);
-
 use core\App;
 use core\Router;
 
 $query = rtrim($_SERVER['QUERY_STRING'], '/');
 
+//Dev
+const DEBUG = 1;
+
+//Prod
+//const DEBUG = 0;
 const WWW = __DIR__;
 define('CORE', dirname(__DIR__) . '/core');
 define('ROOT', dirname(__DIR__));

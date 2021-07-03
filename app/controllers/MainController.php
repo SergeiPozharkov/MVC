@@ -13,6 +13,7 @@ class MainController extends AppController
     {
 //        App::$app->getList();
         $model = new Main();
+
         \R::fancyDebug(true);
         $posts = App::$app->cache->get('posts');
         if (!$posts) {

@@ -90,17 +90,21 @@ class Router
                     $controllerObj->$action();
                     $controllerObj->getView();
                 } else {
-                    echo "Action (method) <b>$controller::$action</b> not found";
+//                    echo "Action (method) <b>$controller::$action</b> not found";
+                    throw new \Exception("Action (method) <b>$controller::$action</b> not found", 404);
                 }
 
             } else {
-                echo "Controller (class) <b>$controller</b> not found";
+                throw new \Exception("Controller (class) <b>$controller</b> not found", 404);
+
+//                echo "Controller (class) <b>$controller</b> not found";
             }
 
         } else {
 
-            http_response_code(404);
-            include '404.html';
+//            http_response_code(404);
+//            include '404.html';
+            throw new \Exception("Page not found", 404);
         }
     }
 
