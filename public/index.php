@@ -7,7 +7,6 @@ $query = rtrim($_SERVER['QUERY_STRING'], '/');
 
 //Dev
 const DEBUG = 1;
-
 //Prod
 //const DEBUG = 0;
 const WWW = __DIR__;
@@ -39,5 +38,3 @@ Router::addRoutes('^(?P<controller>[a-z-]+)/?(?P<action>[a-z-]+)?$');
 
 //debug(Router::getRoutes());
 Router::dispatch($query);
-
-
